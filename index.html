@@ -1,115 +1,84 @@
-<!--
-    ptoszek.pl
-    Powered by Jaczup
-
-    My version (ptoszek.pl): 
-    - https://github.com/jaczup/ptoszek.pl
-    Original version (theannoyingsite.com): 
-    - https://github.com/feross/TheAnnoyingSite.com/
-
-    VERIFY THAT YOU ARE DEFINITELY CONTACTING ME! MANY PEOPLE TRY TO IMPERSONATE ME.
-
-    My official social media I use:
-      - YouTube: @jaczup
-      - TikTok: @jaczup_app
-      - Discord: jaczup
-      - Twitter: @jaczup
-      - E-mail: contact@jaczup.me
-    
-    Contributors:
-      @jaczup - https://github.com/jaczup
--->
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Apache strona</title>
-  <meta charset='UTF-8'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image with Real-time Text and GIF</title>
     <style>
-    html, body {
-      color:greenyellow ;
-      background-color: blue;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'avenir next', avenir,
-        'helvetica neue', helvetica, ubuntu, roboto, noto, 'segoe ui', arial,
-        sans-serif;
-      overflow: hidden;
-    }
-    .hello-message {
-      margin: 40px;
-      text-align:left;
-    }
-    .logout-messages {
-      pointer-events: none;
-      color: red;
-      margin: 40px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      text-shadow: 2px 2px #FFF, 4px 4px 10px #000;
-    }
-    img {
-      width: 300px;
-    }
-    @keyframes blurslowly {
-      0% {
-        filter: none;
-      }
-      92% {
-        filter: blur(0);
-      }
-      96% {
-        filter: blur(1px);
-      }
-      100% {
-        filter: blur(0);
-      }
-    }
-    body {
-      animation-name: blurslowly;
-      animation-iteration-count: infinite;
-      animation-duration: 15s;
-      animation-play-state: running;
-    }
-  </style>
-  <link rel="icon" type="image/x-icon" href="images/apache.png">
-
-  <meta property="og:title" content="Sigma" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="" />
-  <meta property="og:image" content="images/pukla.png" />
-  <meta property="og:description" content="Strona Dla Sigm" />
-  <meta name="keywords" content="ptoszek, ptok, ptoszek.pl, ptok.pl">
-  <meta name="description" content="Strona Dla Sigm">
-  <meta name="theme-color" content="#34eb7d">
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 130vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            position: relative;
+            display: inline-block;
+        }
+        .text {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0);
+            color: rgba(52, 52, 52, 0.682);
+            padding: 10px;
+            border-radius: 5px;
+            white-space: nowrap; /* Prevent text wrapping */
+            text-align: center;
+            font-size: small;
+            font-weight: bold;
+        }
+        .gif {
+            position: absolute;
+            top: 325px; /* Adjust as needed */
+            left: 64px;
+            transform: translateX(-50%);
+            width: 64px; /* Adjust size as needed */
+            height: 40px;
+            border-radius: 5px;
+        }
+        .image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <img src="mobywatel.png" alt="Descriptive Alt Text" class="image">
+        <div class="text" id="realtime-text">Loading...</div>
+        <img src="poland2.gif" alt="Descriptive Alt Text" class="gif">
+    </div>
 
-<noscript>Po coś tego JavaScript wyłączył bamboszu!</noscript>
-<template>
-  <div class='hello-message'>
-    <h1><i>Witam na Stronie dla Sigm</i></h1>
-    
-   <button  style="background-color:greenyellow ;font-size: 25px; border-radius: 20px;  ">Kalkulator Funkcji Kwadratowej</button>
-   <button style="background-color:greenyellow ;font-size: 25px; border-radius: 20px;  ">Księga Makisonii</button>
+    <script>
+        function padZero(num) {
+            return num < 10 ? '0' + num : num;
+        }
 
-    
-  </div>
-  <div class='logout-messages'></div>
-</template>
+        function updateTime() {
+            const now = new Date();
+            const day = padZero(now.getDate());
+            const month = padZero(now.getMonth() + 1);
+            const year = now.getFullYear();
+            const hours = padZero(now.getHours());
+            const minutes = padZero(now.getMinutes());
+            const seconds = padZero(now.getSeconds());
+            const timeString = `Data: ${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+            document.getElementById('realtime-text').textContent = timeString;
+        }
 
-<script src='index.js'></script>
+        function OpenfullScreen(URL) {
+            window.open(URL, '', 'fullscreen=yes, scrollbars=auto, resizble=no, status=yes, toolbar=no,menubar=no, scrollbars=no');
+        }
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6S5388LRGM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-6S5388LRGM');
-</script>
-
+        // Update time immediately and then every second
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
 </body>
 </html>
